@@ -44,7 +44,7 @@
                 <br></br>
                 <label class="label_phone" for="vat">Enter OTP Code</label>
                 <input type="text" name="otpCode" t-att-value="otp" id="otpCode" class="form-control form-control-sm input_phone" required="required"  />
-                <button type="button" id="sendOtp" class="btn btn-primary">Validate OTP</button>
+                <button type="button" id="validateOtp" class="btn btn-primary">Validate OTP</button>
             </div>
             <div class="mb-3 company_vat_group form-group field-vat">
                 <label class="label_vat" for="vat">ZATCA ID</label>
