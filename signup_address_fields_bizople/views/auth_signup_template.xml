@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- -*- coding: utf-8 -*- -->
+<!-- Part of Odoo Module Developed by Bizople Solutions Pvt. Ltd. -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    
+    <template id="auth_sighup_inherit" inherit_id="auth_signup.fields">
+    
+        <xpath expr="//div[hasclass('field-login')]" position="before">
+        
+            <div class="d-flex field-user-type form-group justify-content-around" style="display: none !important;">
+                <label class="radio-inline user_btn">
+                    <input type="radio" name="company_type" value="person" class="person" checked="checked" required="required" />
+                    Individual
+                </label>
+                <label class="radio-inline company_btn">
+                    <input type="radio" name="company_type" value="company" class="company" required="required" />
+                    Company
+                </label>
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('field-name')]" position="after">
+        <!-- <script>
+        $(document).ready(function() {
+        $('#fetch_companies').on('click', function() {
+            // Existing code for fetching companies
+            
+            // Event listener for company radio buttons
+            $('input[name="company"]').on('change', function() {
+                var selectedCRName = $(this).next('label').text();
+                var selectedCRNumber = $(this).val();
+                
+                // Set the values of crName and crNumber in the backend fields
+                $('#crName').val(selectedCRName);
+                $('#crNumber').val(selectedCRNumber);
+            });
+        });
+    });
+    </script> -->
+    <div class="mb-3 company_vat_group form-group field-phone">
+                <label class="label_phone" for="vat">Phone</label>
+                <input type="text" name="phone" t-att-value="phone" id="phone" class="form-control form-control-sm input_phone" required="required"  />
+                <button type="button" id="sendOtp" class="btn btn-primary">Send OTP</button>
+                <br></br>
+                <label class="label_phone" for="vat">Enter OTP Code</label>
+                <input type="text" name="otpCode" t-att-value="otp" id="otpCode" class="form-control form-control-sm input_phone" required="required"  />
+                <button type="button" id="sendOtp" class="btn btn-primary">Validate OTP</button>
+            </div>
+            <div class="mb-3 company_vat_group form-group field-vat">
+                <label class="label_vat" for="vat">ZATCA ID</label>
+                <input type="text" name="vat" t-att-value="vat" id="vat" class="form-control form-control-sm input_vat" required="required" />
+            </div>
+            <div class="mb-3 company_vat_group form-group field-national_id">
+                <label class="national_id" for="national_id">National ID</label>
+                <input type="text" name="national_id" t-att-value="national_id" id="national_id" class="form-control form-control-sm national_id" required="required" />
+                <button type="button" id="fetch_companies" class="btn btn-primary">Fetch Companies</button>
+            </div>
+
+                    <div id="companies_list"></div>
+            <div class="mb-3 company_vat_group form-group field-crName">
+    <label class="crName" for="crName">CR Name</label>
+    <input type="text" name="crName" t-att-value="crName" id="crName" class="form-control form-control-sm crName" required="required" readonly="True"/>
+</div>
+<div class="mb-3 company_vat_group form-group field-crNumber">
+    <label class="crNumber" for="crNumber">CR Number</label>
+    <input type="text" name="crNumber" t-att-value="crNumber" id="crNumber" class="form-control form-control-sm crNumber" required="required" readonly="True"/>
+</div>
+
+    <input type="hidden" name="selected_company_cr_number" id="selected_company_cr_number"/>
+
+            <div class="mb-3 form-group field-address1">
+                <label for="street">Street &amp; Number</label>
+                <input type="text" name="street" t-att-value="street" id="street" class="form-control form-control-sm" required="required"  />
+            </div>
+            <div class="row mb-3">
+                <div class="form-group field-city col-md-6">
+                    <label for="city">City</label>
+                    <input type="city" name="city" id="city" class="form-control form-control-sm"/>
+                </div>
+                <div class="form-group field-zip col-md-6">
+                    <label for="zip">Zipcode</label>
+                    <input type="zip" name="zip" id="zip" class="form-control form-control-sm" required="required" />
+                </div>
+            </div>
+            <div class="mb-2 form-group field-country_id">
+                <label for="country">Country</label>
+                <select id="country_id" name="country_id" class=" form-control form-control-sm">
+                    <t t-foreach="country_ids" t-as="d">
+                        <option t-att-value="d.id" t-att-id="d.id" t-att-class="d.name">
+                            <t t-out="d.name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+
+            <div class="mt-1 mb-2 form-group field-state_id">
+                <label for="state">State</label>
+                <select id="state_id" name="state_id" class="form-control form-control-sm" placehoder="select">
+                    <option value="0" country_id="0">--select--</option>
+                    <t t-foreach="state_ids" t-as="s">
+                        <option t-att-value="s.id" t-att-country_id="s.country_id.id">
+                            <t t-out="s.name" />
+                        </option>
+                    </t>
+                </select>
+            </div>
+        </xpath>
+        
+    </template>
+    
+</odoo>
